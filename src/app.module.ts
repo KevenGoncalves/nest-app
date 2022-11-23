@@ -1,23 +1,23 @@
+/* eslint-disable @typescript-eslint/no-non-null-assertion */
 import { Module } from '@nestjs/common';
 import { ConfigModule } from '@nestjs/config';
-import { CatsModule } from './cats/cats.module';
 import { TypeOrmModule } from '@nestjs/typeorm';
 import { DataSource } from 'typeorm';
-import { Cat } from './cats/entities/cat.entity';
+import { User } from './users/entities/user.entity';
+import { UsersModule } from './users/users.module';
 
 @Module({
   imports: [
-    CatsModule,
+    UsersModule,
     ConfigModule.forRoot(),
     TypeOrmModule.forRoot({
       type: 'mysql',
       host: process.env.DATABASE_HOST,
-      // eslint-disable-next-line @typescript-eslint/no-non-null-assertion
       port: +process.env.DATABASE_PORT!,
       username: process.env.DATABASE_USERNAME,
       password: process.env.DATABASE_PASSWORD,
       database: process.env.DATABASE_NAME,
-      entities: [Cat],
+      entities: [User],
       synchronize: true,
     }),
   ],
