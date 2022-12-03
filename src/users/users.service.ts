@@ -25,6 +25,10 @@ export class UsersService {
     return this.usersRepository.findOneBy({ id });
   }
 
+  verify(email: string, password: string) {
+    return this.usersRepository.findOneBy({ email, password });
+  }
+
   async update(id: number, updateUserDto: UpdateUserDto) {
     const user = await this.usersRepository.findOneBy({ id });
     return this.usersRepository.save({ ...user, ...updateUserDto });
